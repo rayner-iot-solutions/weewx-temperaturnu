@@ -13,7 +13,7 @@ Installation instructions:
 
 1) download
 
-wget -O weewx-temperaturnu.zip https://github.com/YOUR_USERNAME/weewx-temperaturnu/archive/master.zip
+wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/archive/master.zip
 
 2) run the installer
 
