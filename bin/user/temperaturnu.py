@@ -26,11 +26,10 @@ except ImportError:
     from queue import Queue
 
 try:
-    from urllib import urlencode, urlopen
+    from urllib import urlencode
 except ImportError:
     # noinspection PyCompatibility
     from urllib.parse import urlencode
-    from urllib.request import urlopen
 
 import sys
 import time
@@ -139,96 +138,31 @@ class TemperaturNuThread(weewx.restx.RESTThread):
         self.skip_upload = to_bool(skip_upload)
 
     def format_url(self, record):
-        """Return a URL for doing a GET request to temperatur.nu
+        """Build the URL for POST to temperatur.nu
         
         Temperatur.nu expects temperature in Celsius.
         The format is: https://www.temperatur.nu/rapportera.php?hash=[APIKEY]&t=[TEMPERATURE IN °C]
         """
-        url = self.server_url
-        if weewx.debug >= 2:
-            logdbg("url: %s" % url)
-            
-        # Convert record to metric units for temperature
-        # Weewx internally stores data in a specific unit system
-        # We need to get the temperature value and ensure it's in Celsius
+        # Convert record to METRICWX (SI units) to get temperature in Celsius
+        metric_record = weewx.units.to_METRICWX(record)
         
+        # Build the query parameters
         parts = dict()
         parts['hash'] = self.apikey
         
-        # Try to get outTemp (outdoor temperature)
-        # The record comes in the station's native units
-        if 'outTemp' in record:
-            temp_value = record['outTemp']
-            
-            # Get the unit system being used
-            if 'usUnits' in record:
-                unit_system = record['usUnits']
-                # Convert to metric if necessary
-                if unit_system == weewx.US:
-                    # US units: temperature is in Fahrenheit
-                    # Convert F to C: (F - 32) * 5/9
-                    temp_celsius = (temp_value - 32.0) * 5.0 / 9.0
-                elif unit_system == weewx.METRIC:
-                    # Already in Celsius
-                    temp_celsius = temp_value
-                else:
-                    # Assume METRICWX or other - try to convert
-                    temp_celsius = temp_value
-            else:
-                # No unit system specified, assume it might be in Fahrenheit
-                # Try to detect based on value range
-                if temp_value > 50:
-                    # Likely Fahrenheit
-                    temp_celsius = (temp_value - 32.0) * 5.0 / 9.0
-                else:
-                    # Likely Celsius
-                    temp_celsius = temp_value
-            
-            # Round to 1 decimal place for cleaner output
-            parts['t'] = round(temp_celsius, 1)
-            
-            if weewx.debug >= 2:
-                logdbg("Temperature raw: %s, converted to Celsius: %s" % (temp_value, parts['t']))
+        # Get temperature in Celsius
+        if 'outTemp' in metric_record and metric_record['outTemp'] is not None:
+            # Round to 1 decimal place
+            parts['t'] = round(metric_record['outTemp'], 1)
+            logdbg("Temperature converted to Celsius: %s" % parts['t'])
         else:
             logerr("No outTemp found in record")
             return None
 
-        logdbg("%s?%s" % (url, urlencode(parts)))
-        return "%s?%s" % (url, urlencode(parts))
-
-    def process_record(self, record, manager):
-        """Process the record and upload to Temperatur.nu"""
-        try:
-            url = self.format_url(record)
-            if url is None:
-                logerr("Failed to format URL for Temperatur.nu")
-                return
-            
-            # Log the URL being sent (without the API key for security)
-            safe_url = url.replace(self.apikey, "***")
-            loginf("Posting to %s" % safe_url)
-            
-            # Use the parent class method to handle the actual HTTP request
-            # This respects all the retry logic and error handling
-            self.post_request(url, record, manager)
-        except Exception as e:
-            logerr("Error processing record: %s" % str(e))
-
-    def post_request(self, url, record, manager):
-        """Make the HTTP GET request to Temperatur.nu using only standard library"""
-        try:
-            # Use urlopen from standard library (no external dependencies)
-            response = urlopen(url, timeout=self.timeout)
-            response_code = response.getcode()
-            
-            if response_code == 200:
-                loginf("Successfully posted to Temperatur.nu")
-            else:
-                logerr("Temperatur.nu returned status code %d" % response_code)
-            
-            response.close()
-        except Exception as e:
-            logerr("Error posting to Temperatur.nu: %s" % str(e))
+        url = "%s?%s" % (self.server_url, urlencode(parts))
+        logdbg("URL: %s?hash=***&t=%s" % (self.server_url, parts['t']))
+        
+        return url
 
 
 # Use this hook to test the uploader:
