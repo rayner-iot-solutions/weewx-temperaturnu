@@ -42,12 +42,12 @@ wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/ar
 
 **For WeeWX v4 and earlier:**
 ```bash
-sudo wee_extension --install weewx-temperaturnu.zip
+wee_extension --install weewx-temperaturnu.zip
 ```
 
 **For WeeWX v5:**
 ```bash
-sudo weectl extension install weewx-temperaturnu.zip
+weectl extension install weewx-temperaturnu.zip
 ```
 
 ### Step 4: Configure
