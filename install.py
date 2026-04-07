@@ -1,5 +1,5 @@
 # installer for temperaturnu
-# Copyright 2026 RC Chuah (Based on weewx-windy by Matthew Wall and Jacques Terrettaz)
+# Copyright © 2026 RC Chuah (Based on weewx-windy by Matthew Wall and Jacques Terrettaz)
 # Distributed under the terms of the GNU Public License (GPLv3)
 
 from weecfg.extension import ExtensionInstaller
