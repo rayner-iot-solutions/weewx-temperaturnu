@@ -16,7 +16,6 @@ Minimal configuration:
 [StdRESTful]
     [[TemperaturNu]]
         apikey = YOUR_API_KEY_HERE
-
 """
 
 # deal with differences between python 2 and python 3
