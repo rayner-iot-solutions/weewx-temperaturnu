@@ -35,7 +35,7 @@ Visit [Temperatur.nu New Station](https://www.temperatur.nu/nystation/) to regis
 ### Step 2: Download the Extension
 
 ```bash
-wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/archive/master.zip
+wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/archive/main.zip
 ```
 
 ### Step 3: Install the Extension
