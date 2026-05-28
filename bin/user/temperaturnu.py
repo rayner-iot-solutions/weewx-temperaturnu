@@ -32,6 +32,13 @@ except ImportError:
     # noinspection PyCompatibility
     from urllib.parse import urlencode
 
+try:
+    # Python 3
+    MAXSIZE = sys.maxsize
+except AttributeError:
+    # Python 2
+    MAXSIZE = sys.maxint
+
 import sys
 import time
 
@@ -39,6 +46,7 @@ import weewx
 import weewx.manager
 import weewx.restx
 import weewx.units
+import weewx.wxformulas
 from weeutil.weeutil import to_bool
 
 
@@ -165,15 +173,17 @@ class TemperaturNuThread(weewx.restx.RESTThread):
             logerr("No outTemp found in record")
             return None
 
-        url = "%s?%s" % (self.server_url, urlencode(parts))
-        logdbg("URL: %s?hash=***&t=%s" % (self.server_url, parts['t']))
+        # Build final URL
+        url_with_params = "%s?%s" % (self.server_url, urlencode(parts))
+
+        if weewx.debug >= 2:
+            # Log without Hash
+            logdbg("URL: %s?hash=***&t=%s" % (self.server_url, parts['t']))
         
-        return url
+        return url_with_params
 
 
-# Use this hook to test the uploader:
-# PYTHONPATH=bin python bin/user/temperaturnu.py
-
+# Test hook: PYTHONPATH=bin python bin/user/temperaturnu.py
 if __name__ == "__main__":
     class FakeMgr(object):
         table_name = 'fake'
@@ -205,3 +215,13 @@ if __name__ == "__main__":
     print("Test 2 - Metric Units (Celsius):")
     url_metric = t.format_url(r_metric)
     print(url_metric)
+    print()
+
+    # Test with metricwx units (Celsius)
+    r_metricwx = {'dateTime': int(time.time() + 0.5),
+                'usUnits': weewx.METRICWX,
+                'outTemp': 22.5}  # 22.5°C
+    
+    print("Test 3 - MetricWX Units (Celsius):")
+    url_metricwx = t.format_url(r_metricwx)
+    print(url_metricwx)
