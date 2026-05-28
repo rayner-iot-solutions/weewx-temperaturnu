@@ -18,7 +18,7 @@ Minimal configuration:
         apikey = YOUR_API_KEY_HERE
 """
 
-# deal with differences between python 2 and python 3
+# Handle Python 2 vs Python 3 differences
 try:
     # noinspection PyCompatibility
     from Queue import Queue
@@ -27,6 +27,7 @@ except ImportError:
     from queue import Queue
 
 try:
+    # noinspection PyCompatibility
     from urllib import urlencode
 except ImportError:
     # noinspection PyCompatibility
