@@ -45,6 +45,11 @@ from weeutil.weeutil import to_bool
 VERSION = "0.1"
 
 
+if weewx.__version__ < "3":
+    raise weewx.UnsupportedFeature("weewx 3 is required, found %s" %
+                                   weewx.__version__)
+
+
 try:
     # Test for new-style weewx logging by trying to import weeutil.logger
     import weeutil.logger
@@ -120,7 +125,7 @@ class TemperaturNuThread(weewx.restx.RESTThread):
 
     def __init__(self, q, apikey, server_url=TemperaturNu.DEFAULT_URL,
                  skip_upload=False, manager_dict=None,
-                 post_interval=None, max_backlog=sys.maxsize, stale=None,
+                 post_interval=60, max_backlog=sys.maxsize, stale=None,
                  log_success=True, log_failure=True,
                  timeout=60, max_tries=3, retry_wait=5):
         super(TemperaturNuThread, self).__init__(q,
