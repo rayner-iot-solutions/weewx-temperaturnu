@@ -32,13 +32,6 @@ except ImportError:
     # noinspection PyCompatibility
     from urllib.parse import urlencode
 
-try:
-    # Python 3
-    MAXSIZE = sys.maxsize
-except AttributeError:
-    # Python 2
-    MAXSIZE = sys.maxint
-
 import sys
 import time
 
