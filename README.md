@@ -211,5 +211,6 @@ Distributed under the terms of the [GNU General Public License (GPLv3)](LICENSE.
 - **WeeWX:** https://www.weewx.com/
 - **Temperatur.nu:** https://www.temperatur.nu/
 - **WeeWX Documentation:** https://www.weewx.com/docs/
+- **Temperatur.nu Documentation:** https://www.temperatur.nu/info/rapportera-till-temperatur-nu/
 - **weewx-windy:** https://github.com/Jterrettaz/weewx-windy
 - **weewx-temperaturnu:** https://github.com/LapplandsCohan/weewx-temperaturnu
