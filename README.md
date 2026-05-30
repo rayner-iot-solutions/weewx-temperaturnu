@@ -1,4 +1,4 @@
-# weewx-temperaturnu t
+# weewx-temperaturnu
 
 A WeeWX extension that uploads weather data to [Temperatur.nu](https://www.temperatur.nu/)
 
