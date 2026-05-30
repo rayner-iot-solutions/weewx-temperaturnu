@@ -151,6 +151,10 @@ class TemperaturNuThread(weewx.restx.RESTThread):
         Temperatur.nu expects temperature in Celsius.
         The format is: https://www.temperatur.nu/rapportera.php?hash=[APIKEY]&t=[TEMPERATURE IN °C]
         """
+        url = self.server_url
+        if weewx.debug >= 2:
+            logdbg("url: %s" % url)
+        
         # Convert record to METRICWX (SI units) to get temperature in Celsius
         metric_record = weewx.units.to_METRICWX(record)
         
@@ -168,11 +172,13 @@ class TemperaturNuThread(weewx.restx.RESTThread):
             return None
 
         # Build final URL
-        url_with_params = "%s?%s" % (self.server_url, urlencode(parts))
+        url_with_params = "%s?%s" % (url, urlencode(parts))
 
         if weewx.debug >= 2:
             # Log without Hash
-            logdbg("URL: %s?hash=***&t=%s" % (self.server_url, parts['t']))
+            safe_parts = parts.copy()
+            safe_parts['hash'] = '***'
+            logdbg("URL: %s?%s" % (url, urlencode(safe_parts)))
         
         return url_with_params
 
@@ -190,32 +196,44 @@ if __name__ == "__main__":
     weewx.debug = 2
     queue = Queue()
     
-    # Test with US units (Fahrenheit)
+    # Test 1: Purely US Units (weewx.US)
+    # US: temperature=°F
     t = TemperaturNuThread(queue, apikey='test_key_12345')
     r_us = {'dateTime': int(time.time() + 0.5),
             'usUnits': weewx.US,
-            'outTemp': 72.5}  # 72.5°F ≈ 22.5°C
-    
-    print("Test 1 - US Units (Fahrenheit):")
+            'outTemp': 72.5}  # 72.5°F → 22.5°C
+
+    print("=" * 80)
+    print("Test 1 - Purely US Units (weewx.US)")
+    print("Input: US units (°F)")
+    print("=" * 80)
     url_us = t.format_url(r_us)
     print(url_us)
     print()
     
-    # Test with metric units (Celsius)
+    # Test 2: Purely Metric Units (weewx.METRIC)
+    # METRIC: temperature=°C
     r_metric = {'dateTime': int(time.time() + 0.5),
                 'usUnits': weewx.METRIC,
-                'outTemp': 22.5}  # 22.5°C
-    
-    print("Test 2 - Metric Units (Celsius):")
+                'outTemp': 22.5}  # 22.5°C → 22.5°C
+
+    print("=" * 80)
+    print("Test 2 - Purely Metric Units (weewx.METRIC)")
+    print("Input: Metric units (°C)")
+    print("=" * 80)
     url_metric = t.format_url(r_metric)
     print(url_metric)
     print()
 
-    # Test with metricwx units (Celsius)
+    # Test 3: Purely MetricWX Units (weewx.METRICWX)
+    # METRICWX: temperature=°C
     r_metricwx = {'dateTime': int(time.time() + 0.5),
-                'usUnits': weewx.METRICWX,
-                'outTemp': 22.5}  # 22.5°C
-    
-    print("Test 3 - MetricWX Units (Celsius):")
+                  'usUnits': weewx.METRICWX,
+                  'outTemp': 22.5}  # 22.5°C → 22.5°C
+
+    print("=" * 80)
+    print("Test 3 - Purely MetricWX Units (weewx.METRICWX)")
+    print("Input: MetricWX units (°C)")
+    print("=" * 80)
     url_metricwx = t.format_url(r_metricwx)
     print(url_metricwx)
