@@ -160,6 +160,12 @@ Test 3 - Purely MetricWX Units (weewx.METRICWX)
 Input: MetricWX units (°C)
 ================================================================================
 https://www.temperatur.nu/rapportera.php?hash=test_key_12345&t=22.5
+
+================================================================================
+EXPECTED OUTPUTS (for all three tests - should be identical):
+================================================================================
+temperature=22.5 (°C)
+================================================================================
 ```
 
 ### Common Issues
