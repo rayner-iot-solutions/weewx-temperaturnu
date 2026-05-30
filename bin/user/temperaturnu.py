@@ -237,3 +237,10 @@ if __name__ == "__main__":
     print("=" * 80)
     url_metricwx = t.format_url(r_metricwx)
     print(url_metricwx)
+    print()
+
+    print("=" * 80)
+    print("EXPECTED OUTPUTS (for all three tests - should be identical):")
+    print("=" * 80)
+    print("temperature=22.5 (°C)")
+    print("=" * 80)
