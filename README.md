@@ -143,10 +143,22 @@ PYTHONPATH=bin python bin/user/temperaturnu.py
 
 Expected output:
 ```
-Test 1 - US Units (Fahrenheit):
+================================================================================
+Test 1 - Purely US Units (weewx.US)
+Input: US units (°F)
+================================================================================
 https://www.temperatur.nu/rapportera.php?hash=test_key_12345&t=22.5
 
-Test 2 - Metric Units (Celsius):
+================================================================================
+Test 2 - Purely Metric Units (weewx.METRIC)
+Input: Metric units (°C)
+================================================================================
+https://www.temperatur.nu/rapportera.php?hash=test_key_12345&t=22.5
+
+================================================================================
+Test 3 - Purely MetricWX Units (weewx.METRICWX)
+Input: MetricWX units (°C)
+================================================================================
 https://www.temperatur.nu/rapportera.php?hash=test_key_12345&t=22.5
 ```
 
