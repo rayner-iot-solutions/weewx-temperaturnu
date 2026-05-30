@@ -1,4 +1,4 @@
-# weewx-temperaturnu v0.1 - 7 April 2026
+# weewx-temperaturnu v0.1 - 30 May 2026
 * Initial release based on weewx-windy template
 * Supports Temperatur.nu API
 * Automatic temperature conversion to Celsius using weewx.units.to_METRICWX()
