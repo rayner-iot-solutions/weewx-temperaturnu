@@ -239,7 +239,7 @@ if __name__ == "__main__":
     print()
 
     print("=" * 80)
-    print("EXPECTED OUTPUTS (for all three tests - should be identical):")
+    print("EXPECTED OUTPUTS (for all three unit tests - should be identical):")
     print("=" * 80)
     print("temperature=22.5 (°C)")
     print("=" * 80)
