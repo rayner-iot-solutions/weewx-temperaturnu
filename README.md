@@ -28,14 +28,14 @@ The extension performs automatic temperature conversion to Celsius regardless of
 
 - **Python:** 2.7+ or 3.x
 - **WeeWX:** v3.8.0 or later
-- **API Key:** Obtain from [Temperatur.nu New Station](https://www.temperatur.nu/nystation/)
+- **API Key:** Obtain from [Temperatur.nu](https://www.temperatur.nu/nystation/)
 - **External Libraries:** None (uses only Python standard library)
 
 ## Installation
 
 ### Step 1: Obtain an API Key
 
-Visit [Temperatur.nu - Report Station](https://www.temperatur.nu/info/rapportera-till-temperatur-nu/) to register your weather station and receive an API key.
+Visit [Temperatur.nu New Station](https://www.temperatur.nu/nystation/) to register your weather station and receive an API key.
 
 ### Step 2: Download the Extension
 
@@ -219,7 +219,7 @@ Input: MetricWX units (°C)
 https://www.temperatur.nu/rapportera.php?hash=test_key_12345&t=22.5
 
 ================================================================================
-EXPECTED OUTPUTS (for all three tests - should be identical):
+EXPECTED OUTPUTS (for all three unit tests - should be identical):
 ================================================================================
 temperature=22.5 (°C)
 ================================================================================
