@@ -1,10 +1,34 @@
-# weewx-temperaturnu v0.1 - 1 June 2026
-* Initial release based on weewx-windy template
-* Supports Temperatur.nu API
-* Automatic temperature conversion to Celsius using weewx.units.to_METRICWX()
-* Compatible with weewx V3.8.0 and later
-* Support for both weewx V4 (wee_extension) and V5 (weectl) installers
-* Uses only Python standard library - no external dependencies required
-* Support for both Python 2.7+ and Python 3.x
-* Simplified implementation with only format_url() override
-* Based on weewx-windy and weewx-temperaturnu by Matthew Wall, Jacques Terrettaz and Konrad Skeri Ekblad
+# weewx-temperaturnu Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.1] - 2026-06-02
+
+### Initial Release
+
+**Features:**
+- Automatic temperature uploads to Temperatur.nu via HTTP GET
+- Automatic temperature conversion to Celsius using `weewx.units.to_METRICWX()`
+- Support for multiple unit systems (US, Metric, MetricWX)
+- Temperature rounding to 1 decimal place
+- Full Python 2.7+ and Python 3.x compatibility
+- WeeWX v3.8.0 and later support
+- Support for both WeeWX v4 (wee_extension) and v5 (weectl) installers
+- Zero external dependencies - uses only Python standard library
+- Comprehensive debug logging with API key masking for security
+- Built-in self-test functionality with three unit system tests
+
+**Technical Implementation:**
+- Based on weewx-windy and weewx-temperaturnu templates
+- Extends `weewx.restx.StdRESTbase` for REST API integration
+- Implements thread-safe queue-based architecture
+- Handles both modern (weeutil.logger) and legacy (syslog) logging
+
+**Testing:**
+- Includes unit tests for US, Metric, and MetricWX systems
+- All three unit systems correctly convert 72.5°F / 22.5°C
+- Manual testing via `python bin/user/temperaturnu.py`
+
+**Credits:**
+- RC Chuah (Author)
+- Based on work by Matthew Wall, Jacques Terrettaz, and Konrad Skeri Ekblad
