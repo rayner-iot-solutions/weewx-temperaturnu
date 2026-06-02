@@ -5,7 +5,6 @@ A lightweight WeeWX extension that automatically uploads weather station tempera
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Python](https://img.shields.io/badge/Python-2.7%2B%20%7C%203.x-blue.svg)
 ![WeeWX](https://img.shields.io/badge/WeeWX-3.8.0%2B-blue.svg)
-![Status](https://img.shields.io/badge/Status-Stable-green.svg)
 
 ## Overview
 
@@ -41,7 +40,7 @@ Visit [Temperatur.nu - Report Station](https://www.temperatur.nu/info/rapportera
 ### Step 2: Download the Extension
 
 ```bash
-wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/releases/download/latest/weewx-temperaturnu.zip
+wget -O weewx-temperaturnu.zip https://github.com/rc-chuah/weewx-temperaturnu/releases/latest/download/weewx-temperaturnu.zip
 ```
 
 ### Step 3: Install
