@@ -19,6 +19,6 @@ class TemperaturNuInstaller(ExtensionInstaller):
             config={
                 'StdRESTful': {
                     'TemperaturNu': {
-                        'apikey': 'replace_me'}}},
+                        'apikey': 'YOUR_API_KEY_HERE'}}},
             files=[('bin/user', ['bin/user/temperaturnu.py'])]
         )
