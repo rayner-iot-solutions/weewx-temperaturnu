@@ -1,4 +1,4 @@
-# weewx-temperaturnu t
+# weewx-temperaturnu
 
 A lightweight WeeWX extension that automatically uploads weather station temperature data to [Temperatur.nu](https://www.temperatur.nu/).
 
