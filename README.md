@@ -64,8 +64,7 @@ Edit `/etc/weewx/weewx.conf` and add the required configuration:
 ```ini
 [StdRESTful]
     [[TemperaturNu]]
-        # Your API key from temperatur.nu (REQUIRED)
-        apikey = YOUR_API_KEY_FROM_TEMPERATUR.NU
+        apikey = YOUR_API_KEY_HERE
 ```
 
 **Optional parameters:**
@@ -73,6 +72,9 @@ Edit `/etc/weewx/weewx.conf` and add the required configuration:
 ```ini
 [StdRESTful]
     [[TemperaturNu]]
+        # Your API key from temperatur.nu (REQUIRED)
+        apikey = YOUR_API_KEY_HERE
+        
         # Enable or disable extension (default: true)
         enabled = true
         
