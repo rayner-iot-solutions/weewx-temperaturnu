@@ -232,7 +232,7 @@ All three tests should produce identical results (22.5°C), confirming the conve
 ### Test Manually with curl
 
 ```bash
-curl "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY&t=20"
+curl -v "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY&t=20"
 ```
 
 ### Common Issues and Solutions
