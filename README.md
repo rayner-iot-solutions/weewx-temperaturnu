@@ -146,7 +146,7 @@ The extension automatically converts your weather station's temperature to Celsi
 The extension uploads temperature data to Temperatur.nu using HTTP GET with the following format:
 
 ```
-GET /rapportera.php?hash=YOUR_API_KEY&t=22.5 HTTP/1.1
+GET /rapportera.php?hash=YOUR_API_KEY_HERE&t=22.5 HTTP/1.1
 Host: www.temperatur.nu
 ```
 
@@ -232,7 +232,7 @@ All three tests should produce identical results (22.5°C), confirming the conve
 ### Test Manually with curl
 
 ```bash
-curl -v "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY&t=20"
+curl -v "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY_HERE&t=20"
 ```
 
 ### Common Issues and Solutions
@@ -241,7 +241,7 @@ curl -v "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY&t=20"
 |-------|-------|----------|
 | **No uploads occurring** | API key missing or incorrect | Verify `apikey` in `/etc/weewx/weewx.conf` matches your Temperatur.nu account |
 | **"No outTemp found in record"** | Temperature field missing | Ensure your weather station records the `outTemp` field (most stations do by default) |
-| **Connection errors** | Network or firewall issue | Test connectivity: `curl -v https://www.temperatur.nu/rapportera.php?hash=test&t=20` |
+| **Connection errors** | Network or firewall issue | Test connectivity: `curl -v "https://www.temperatur.nu/rapportera.php?hash=YOUR_API_KEY_HERE&t=20"` |
 | **Wrong temperature value** | Incorrect unit system | Check `/etc/weewx/weewx.conf` for correct `unit_system` setting (US, Metric, or MetricWX) |
 | **Extension not loading** | Python path or import error | Verify WeeWX installation; check logs with `debug = 2` enabled |
 
