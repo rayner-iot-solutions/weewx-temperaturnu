@@ -227,7 +227,7 @@ temperature=22.5 (°C)
 ================================================================================
 ```
 
-All three tests should produce identical results (22.5°C), confirming the conversion logic works correctly.
+All three unit tests should produce identical results (22.5°C), confirming the conversion logic works correctly.
 
 ### Test Manually with curl
 
